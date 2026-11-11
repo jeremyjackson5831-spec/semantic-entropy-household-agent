@@ -57,7 +57,11 @@ The check flagged 52 of 114 live answers (46%) between October 22 and November 1
 
 The judge produced the grouping in 102 checks. The embedding fallback, the method I had already found to over-flag, produced it in the other 12.
 
-The pattern suggests a cause, which I have not yet tested. Advice questions have no single correct answer, so honest samples legitimately differ, and the check reads that as guessing. Status questions, which do have one answer, were flagged half as often. The check measures disagreement between samples. Disagreement means confabulation only when the question has a fact behind it.
+My first explanation was that advice questions have no single right answer, so honest samples differ and the check reads that as guessing. I tested it the same night. A rule-based split of the 114 questions by kind, open-ended against factual, showed open-ended questions flagged 51% of the time (26 of 51) and factual ones 41% (26 of 63). Question type explains little of the over-flagging.
+
+The flagged factual questions share something else: they ask for a list. "What needs me today?" was asked 20 times and flagged 10. My current guess, not yet tested, is that two correct answers listing different subsets of items are judged as disagreeing.
+
+The same replay exposed a weakness in the data. The 114 checks are dominated by a few repeated prompts, so the number of distinct questions is much smaller than 114.
 
 ## Limits and next tests
 
@@ -67,8 +71,8 @@ The pattern suggests a cause, which I have not yet tested. Advice questions have
 
 What I would test next, in order:
 
-1. Label a sample of the 52 flagged answers as right or wrong, to measure how many flags were real.
-2. Classify each question as factual or open-ended before checking, and skip or re-threshold the open-ended ones.
+1. Label a sample of the 52 flagged answers as right or wrong, to measure how many flags were real, using distinct questions in place of repeated prompts.
+2. Judge list answers on how much their items overlap, or tell the judge that a subset is not a contradiction. Then re-run the same 114 checks.
 3. Compare N = 3 against N = 5 and N = 10 samples. With four answers, entropy can only take a few values.
 4. Use a different model as the judge and measure how often the two judges agree.
 5. Remove the embedding fallback, or log its flags separately, since it accounts for 12 checks of known lower quality.
